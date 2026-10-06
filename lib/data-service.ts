@@ -5,7 +5,7 @@ import { supabase } from "./supabase";
 /////////////
 // GET
 
-export async function getCabin(id: string) {
+export async function getCabin(id) {
   const { data, error } = await supabase
     .from("cabins")
     .select("*")
@@ -13,7 +13,7 @@ export async function getCabin(id: string) {
     .single();
 
   // For testing
-  // await new Promise((res) => setTimeout(res, 1000));
+  // await new Promise((res) => setTimeout(res, 2000));
 
   if (error) {
     console.error(error);
@@ -23,7 +23,7 @@ export async function getCabin(id: string) {
   return data;
 }
 
-export async function getCabinPrice(id: string) {
+export async function getCabinPrice(id) {
   const { data, error } = await supabase
     .from("cabins")
     .select("regularPrice, discount")
@@ -55,7 +55,7 @@ export const getCabins = async function () {
 };
 
 // Guests are uniquely identified by their email address
-export async function getGuest(email: string) {
+export async function getGuest(email) {
   const { data, error } = await supabase
     .from("guests")
     .select("*")
@@ -66,7 +66,7 @@ export async function getGuest(email: string) {
   return data;
 }
 
-export async function getBooking(id: string) {
+export async function getBooking(id) {
   const { data, error, count } = await supabase
     .from("bookings")
     .select("*")
@@ -81,7 +81,7 @@ export async function getBooking(id: string) {
   return data;
 }
 
-export async function getBookings(guestId: string) {
+export async function getBookings(guestId) {
   const { data, error, count } = await supabase
     .from("bookings")
     // We actually also need data on the cabins as well. But let's ONLY take the data that we actually need, in order to reduce downloaded data.
@@ -99,7 +99,7 @@ export async function getBookings(guestId: string) {
   return data;
 }
 
-export async function getBookedDatesByCabinId(cabinId: string) {
+export async function getBookedDatesByCabinId(cabinId) {
   let today = new Date();
   today.setUTCHours(0, 0, 0, 0);
   today = today.toISOString();
@@ -131,6 +131,8 @@ export async function getBookedDatesByCabinId(cabinId: string) {
 
 export async function getSettings() {
   const { data, error } = await supabase.from("settings").select("*").single();
+
+  // await new Promise((res) => setTimeout(res, 5000));
 
   if (error) {
     console.error(error);
@@ -165,7 +167,7 @@ export async function createGuest(newGuest) {
 
   return data;
 }
-
+/*
 export async function createBooking(newBooking) {
   const { data, error } = await supabase
     .from("bookings")
@@ -181,10 +183,11 @@ export async function createBooking(newBooking) {
 
   return data;
 }
-
+*/
 /////////////
 // UPDATE
 
+/*
 // The updatedFields is an object which should ONLY contain the updated data
 export async function updateGuest(id, updatedFields) {
   const { data, error } = await supabase
@@ -228,3 +231,4 @@ export async function deleteBooking(id) {
   }
   return data;
 }
+*/
